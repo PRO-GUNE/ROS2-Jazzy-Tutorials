@@ -190,6 +190,19 @@ class LabTester:
             message="Complex transformations"
         )
 
+        # Test 6: Chains of Rotations Only
+        point = np.array([3, 2, 4])
+        transforms = [
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': 0, 'y': 45, 'z': 45}},
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': 45, 'y': 45, 'z': 0}},
+        ]
+        transformed = chain_transforms(point, transforms)
+        self.assert_array_almost_equal(
+            transformed, [4, 3, 2], 
+            message="Chain of rotations"
+        )
+        
+
     def print_summary(self):
         """Print summary of test results"""
         print(f"\n=== Test Summary ===")
