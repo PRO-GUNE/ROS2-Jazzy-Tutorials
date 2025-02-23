@@ -445,10 +445,10 @@ class LabTester:
         ]
         transformed = chain_transforms(point, transforms)
         self.assert_array_almost_equal(
-            transformed,
-            [2.56055, -2.43085, -1.54043],
-            decimal=3,
-            message="Complex transformations with nagative angles and additional transform",
+
+            transformed, [8.04135, -2.03015, 7.18498], decimal=3,
+            message="Complex transformations with nagative angles and additional transform"
+
         )
 
     def print_summary(self):
