@@ -113,6 +113,33 @@ class LabTester:
             message="Combined rotation and translation",
         )
 
+        # Test 7: Large rotations
+        point = np.array([4, 3])
+        translation = np.array([1, 1])
+        transformed = homogenous_transform_2D(point, translation, 190)
+        self.assert_array_almost_equal(
+            transformed, [-2.41828648, -2.64901597],decimal=3,
+            message="Large rotaions"
+        )
+
+        # Test 8
+        point = np.array([2, 4])
+        translation = np.array([-2, -1])
+        transformed = homogenous_transform_2D(point, translation, 75)
+        self.assert_array_almost_equal(
+            transformed, [-5.34606521, 1.96712783],decimal=3,
+            message="Combined transformation"
+        )
+
+        # Test 9
+        point = np.array([-2, 2])
+        translation = np.array([2, -2])
+        transformed = homogenous_transform_2D(point, translation, 90)
+        self.assert_array_almost_equal(
+            transformed, [0, -4],decimal=3,
+            message="Combined transformation"
+        )
+
     def test_homogeneous_transform_3d(self, homogenous_transform_3D: Callable):
         """
         Test suite for 3D homogeneous transformation implementation
@@ -247,6 +274,26 @@ class LabTester:
             [1.43301, 1.17678, 1.88388],
             decimal=3,
             message="Combined rotations about negative x, y, and z axes with translation",
+        )
+
+        # Test 12: Identity transformation
+        point = np.array([2, 2, 3])
+        translation = np.array([0, 0, 0])
+        rotation = {'x': 0, 'y': 0, 'z': 0}
+        transformed = homogenous_transform_3D(point, translation, rotation)
+        self.assert_array_almost_equal(
+            transformed, [2, 2, 3], decimal=3,
+            message="Identity transformation"
+        )
+
+        # Test 13: Large rotations
+        point = np.array([2, 1, 3])
+        translation = np.array([1, 0, 2])
+        rotation = {'x':360, 'y': 120, 'z': 240}
+        transformed = homogenous_transform_3D(point, translation, rotation)
+        self.assert_array_almost_equal(
+            transformed, [3.66506351, -2.23205081, 0.6160254], decimal=3,
+            message="Large rotations"
         )
 
     def test_chain_transformations(self, chain_transforms: Callable):
@@ -450,6 +497,31 @@ class LabTester:
             decimal=3,
             message="Complex transformations with nagative angles and additional transform",
         )
+
+        # Test 9: Chains of Rotations Only
+        point = np.array([3, 2, 4])
+        transforms = [
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': 0, 'y': 45, 'z': 45}},
+            {'translation': np.array([0, 0, 0]), 'rotation': {'x': 45, 'y': 45, 'z': 0}},
+        ]
+        transformed = chain_transforms(point, transforms)
+        self.assert_array_almost_equal(
+            transformed, [4, 3, 2], 
+            message="Chain of rotations"
+        )
+        
+        # Test 10: Opposite transformations
+        point = np.array([1, 1, 1])
+        transforms = [
+            {'translation': np.array([2, 2, 2]), 'rotation': {'x': 90, 'y': 90, 'z': 90}},
+            {'translation': np.array([-2, -2, -2]), 'rotation': {'x': -90, 'y': -90, 'z': -90}},
+        ]
+        transformed = chain_transforms(point, transforms)
+        self.assert_array_almost_equal(
+            transformed, [-5, -1, 1],
+            message="Opposite transformations"
+        )
+
 
     def print_summary(self):
         """Print summary of test results"""
