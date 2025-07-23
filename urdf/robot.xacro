@@ -75,18 +75,36 @@
     <link name="${name}">
       <visual>
         <!-- TODO: Complete -->
+        <geometry>
+          <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <!-- Wheel orientation -->
+        <origin rpy="0 0 0" xyz="pi_const/2 0 0"/>  
       </visual>
 
       <collision>
         <!-- TODO: Complete -->
+        <geometry>
+          <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="pi_const/2 0 0"/>
       </collision>
 
       <inertial>
         <!-- TODO: Complete -->
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia 
+          ixx="${Iz_wheel}" ixy="0.0" ixz="0.0"
+          iyy="${I_wheel}" iyz="0.0"
+          izz="${Iz_wheel}"/>
     </link>
 
     <joint name="${name}_joint" type="${joint_type}">
-      <!-- TODO: Complete -->
+      <parent link="${name}"/>
+      <child link="${name}_link"/>
+      <origin xyz="0 0 0"/>
+      <axis xyz="0 0 1"/>
       <limit effort="1000" velocity="1000"/>
       <dynamics damping="1.0" friction="1.0"/>
     </joint>
@@ -94,6 +112,9 @@
 
   <!-- Instantiate wheels -->
   <xacro:wheel name="rear_right_wheel"  x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" joint_type="continuous"/>
+  <xacro:wheel name="rear_left_wheel"   x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" y="${body_link_y_dim/2 + 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" joint_type="continuous"/>
+  <xacro:wheel name="front_right_wheel" x="${body_link_x_dim/2 - 1.2*wheel_link_radius}" y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" joint_type="continuous"/>
+  <xacro:wheel name="front_left_wheel"  x="${body_link_x_dim/2 - 1.2*wheel_link_radius}" y="${body_link_y_dim/2 + 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" joint_type="continuous"/>
   <!-- TODO: Complete: Wheels must be named - rear_left_wheel, front_right_wheel, front_left_wheel -->
 
 <!-- Camera -->
@@ -127,19 +148,51 @@
   <!-- Sonar -->
   <link name="sonar_link">
     <!-- TODO: Complete -->
+    <visual>
+      <geometry>
+        <cylinder radius="0.02" length="0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.02" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+    </inertial>
   </link>
 
   <joint name="sonar_joint" type="fixed">
     <!-- TODO: Complete -->
+    <parent link="body_link"/>
+    <child link="sonar_link"/>
+     <origin xyz="${body_link_x_dim/2 + 0.01} 0 ${body_link_z_dim/4}" rpy="0 0 0"/>
   </joint>
 
   <!-- Lidar -->
   <link name="lidar_link">
     <!-- TODO: Complete -->
+    <visual>
+      <geometry>
+        <cylinder radius="0.04" length="0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.04" length="0.02"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.2"/>
+    </inertial>
   </link>
 
   <joint name="lidar_joint" type="fixed">
     <!-- TODO: Complete -->
+    <parent link="body_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0 0 ${body_link_z_dim/2 + 0.05}" rpy="0 0 0"/>
   </joint>
 
 </robot>

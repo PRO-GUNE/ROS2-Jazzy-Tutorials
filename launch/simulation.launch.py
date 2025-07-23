@@ -38,11 +38,11 @@ def generate_launch_description():
                     "world": PathJoinSubstitution(
                         [pkg_name, "worlds", "four_walls.world"]
                     ),
-                    "paused": "TODO: Provide the correct value",
-                    "use_sim_time": "TODO: Provide the correct value",
-                    "gui": "TODO: Provide the correct value",
-                    "headless": "TODO: Provide the correct value",
-                    "debug": "TODO: Provide the correct value",
+                    "paused": "false",
+                    "use_sim_time": "true",
+                    "gui": "true",
+                    "headless": "false",
+                    "debug": "false",
                 }.items(),
             ),
             # Robot description parameter
@@ -60,7 +60,28 @@ def generate_launch_description():
             ),
             # TODO: Create the robot state publisher node
             # Robot state publisher
+            Node(
+                package="robot_state_publisher",
+                executable="robot_state_publisher",
+                name="robot_state_publisher",
+                output="screen",
+                parameters=[{"robot_description": xacro_command, 
+                             "use_sim_time": True}],
+            ),
             # TODO: Spawn the robot in Gazebo
             # Spawn robot in Gazebo
+            Node(
+                package="gazebo_ros",
+                executable="spawn_entity.py",
+                name="spawn_entity",
+                output="screen",
+                arguments=[
+                    "-entity", "robot",
+                    "-topic", "robot_description",
+                    "-x", "0.0",
+                    "-y", "0.0",
+                    "-z", "0.1",  
+                ]
+            ),
         ]
     )
