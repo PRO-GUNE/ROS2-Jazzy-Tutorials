@@ -1,160 +1,244 @@
 <?xml version="1.0"?>
-<robot>
+<robot name="four_wheel_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- Body link properties -->
-  <gazebo reference="body_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+  <!-- Base Link -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.5 0.4 0.2"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.4 0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0"
+               iyy="0.1" iyz="0.0"
+               izz="0.1"/>
+    </inertial>
+  </link>
+
+  <!-- Wheels -->
+  <!-- Use macros in Xacro later to avoid repetition -->
+  <link name="front_left_wheel"/>
+  <link name="front_right_wheel"/>
+  <link name="rear_left_wheel"/>
+  <link name="rear_right_wheel"/>
+
+  <!-- Wheel joints -->
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel"/>
+    <origin xyz="0.2 0.2 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel"/>
+    <origin xyz="0.2 -0.2 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+    <origin xyz="-0.2 0.2 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+    <origin xyz="-0.2 -0.2 -0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Camera -->
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.1 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Sonar -->
+  <link name="sonar_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.02" length="0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="sonar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="sonar_link"/>
+    <origin xyz="0.2 0 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Lidar -->
+  <link name="lidar_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Gazebo Extensions -->
+  <gazebo reference="base_link">
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <!-- Wheel properties - All wheels should have similar appearance in simulation -->
-  <gazebo reference="rear_right_wheel">
+  <gazebo reference="front_left_wheel">
+    <material>Gazebo/Yellow</material>
     <mu1>0.2</mu1>
     <mu2>0.2</mu2>
-    <material>Gazebo/Yellow</material>
-  </gazebo>
-
-  <gazebo reference="rear_left_wheel">
-    <!-- TODO: Complete -->
   </gazebo>
 
   <gazebo reference="front_right_wheel">
-    <!-- TODO: Complete -->
+    <material>Gazebo/Yellow</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
   </gazebo>
 
-  <gazebo reference="front_left_wheel">
-    <!-- TODO: Complete -->
+  <gazebo reference="rear_left_wheel">
+    <material>Gazebo/Yellow</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
   </gazebo>
 
-  <gazebo reference="sonar_link">
-    <material>Gazebo/Blue</material>
+  <gazebo reference="rear_right_wheel">
+    <material>Gazebo/Yellow</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
   </gazebo>
 
-  <!-- Skid-steer drive controller plugin -->
+  <!-- Plugins -->
   <gazebo>
     <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
       <updateRate>100.0</updateRate>
-      <robotNamespace></robotNamespace>
-
+      <robotNamespace>/</robotNamespace>
       <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
-      <!-- TODO: Give the correct joint values -->
-      <rightFrontJoint></rightFrontJoint>
-      <leftRearJoint></leftRearJoint>
-      <rightRearJoint></rightRearJoint>
-
-      <!-- Replace macros with numeric values if used outside xacro -->
-      <wheelSeparation>0.7</wheelSeparation>
-      <wheelDiameter>0.3</wheelDiameter> <!-- 2 * 0.15 radius -->
-
-      <torque>1000</torque>
-
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>rear_right_wheel_joint</rightRearJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <torque>10</torque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>body_link</robotBaseFrame>
-
-      <covariance_x>0.0001</covariance_x>
-      <covariance_y>0.0001</covariance_y>
-      <covariance_yaw>0.01</covariance_yaw>
+      <robotBaseFrame>base_link</robotBaseFrame>
     </plugin>
   </gazebo>
 
-  <!-- Camera -->
+  <!-- Camera sensor -->
   <gazebo reference="camera_link">
-    <material>Gazebo/Green</material>
     <sensor name="camera" type="camera">
-        <pose> 0 0 0 0 0 0 </pose>
-        <visualize>true</visualize>
-        <update_rate>10</update_rate>
-        <camera>
-            <horizontal_fov>1.089</horizontal_fov>
-            <image>
-                <format>R8G8B8</format>
-                <width>640</width>
-                <height>480</height>
-            </image>
-            <clip>
-                <near>0.05</near>
-                <far>8.0</far>
-            </clip>
-        </camera>
-        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-            <frameName>camera_link_optical</frameName>
-            <topicName>sensor/camera</topicName>
-            <cameraName>camera</cameraName>
-        </plugin>
-    </sensor>
-
-<!-- Sonar range measurement -->
-  <gazebo reference="sonar_link">
-    <sensor type="ray" name="sonar">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>true</visualize>
+      <update_rate>30.0</update_rate>
+      <camera>
+        <horizontal_fov>1.0</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>10.0</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <cameraName>camera</cameraName>
+        <topicName>sensor/camera</topicName>
+        <frameName>camera_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- Sonar sensor -->
+  <gazebo reference="sonar_link">
+    <sensor name="sonar" type="ray">
+      <pose>0 0 0 0 0 0</pose>
       <update_rate>50</update_rate>
       <ray>
-         <scan>
-            <horizontal>
-               <samples>10</samples>
-               <resolution>1</resolution> 
-               <min_angle>-0.01</min_angle>
-               <max_angle>0.01</max_angle>
-            </horizontal>
-            <vertical>
-               <samples>10</samples>
-               <resolution>1</resolution> 
-               <min_angle>-0.01</min_angle>
-               <max_angle>0.01</max_angle> 
-            </vertical>
-         </scan>
-         <range>
-            <min>0.01</min>
-            <max>5</max>
-            <resolution>0.02</resolution>
-         </range>
+        <scan>
+          <horizontal>
+            <samples>10</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.1</min_angle>
+            <max_angle>0.1</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.1</min>
+          <max>4.0</max>
+          <resolution>0.01</resolution>
+        </range>
       </ray>
-      <plugin name="gazebo_ros_range" filename="libgazebo_ros_range.so">
+      <plugin name="sonar_plugin" filename="libgazebo_ros_range.so">
         <topicName>sensor/sonar</topicName>
         <frameName>sonar_link</frameName>
-        <alwaysOn>true</alwaysOn>
-        <updateRate>50</updateRate>
-        <gaussianNoise>0.005</gaussianNoise>
         <radiation>ULTRASOUND</radiation>
-        <fov>1.0</fov>
+        <fov>0.2</fov>
       </plugin>
     </sensor>
   </gazebo>
 
-<!-- Lidar -->
-<gazebo reference="lidar_link">
-
-</gazebo>
-  <material>Gazebo/Red</material>
-  <sensor name="lidar" type="ray">
-      <pose> 0 0 0 0 0 0 </pose>
-      <visualize>false</visualize>
+  <!-- Lidar sensor -->
+  <gazebo reference="lidar_link">
+    <sensor name="lidar" type="ray">
+      <pose>0 0 0 0 0 0</pose>
       <update_rate>10</update_rate>
       <ray>
-          <scan>
-              <horizontal>
-                  <samples>360</samples>
-                  <min_angle>-3.14</min_angle>
-                  <max_angle>3.14</max_angle>
-              </horizontal>
-          </scan>
-          <range>
-              <min>0.3</min>
-              <max>12</max>
-          </range>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <min_angle>-3.14</min_angle>
+            <max_angle>3.14</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.2</min>
+          <max>10.0</max>
+        </range>
       </ray>
       <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
-          <ros>
-              <argument>~/out:=scan</argument>
-          </ros>
-          <output_type>sensor_msgs/LaserScan</output_type>
-          <frameName>laser_frame</frameName>
-          <topicName>sensor/lidar</topicName>
+        <frameName>lidar_link</frameName>
+        <topicName>sensor/lidar</topicName>
       </plugin>
-  </sensor>
+    </sensor>
   </gazebo>
+
 </robot>
