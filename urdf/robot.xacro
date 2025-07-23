@@ -1,6 +1,27 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="four_wheel_robot">
 
+  <!-- Material description -->
+  <material name="white">
+    <color rgba="1 1 1 1" />
+  </material>
+
+  <material name="orange">
+    <color rgba="1 0.3 0.1 1"/>
+  </material>
+
+  <material name="blue">
+    <color rgba="0.2 0.2 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+
   <!-- Body dimensions -->
   <xacro:property name="body_link_x_dim" value="1"/>
   <xacro:property name="body_link_y_dim" value="0.6"/>
@@ -30,11 +51,11 @@
   <xacro:property name="Iz_wheel" value="${0.5 * wheel_mass * wheel_link_radius * wheel_link_radius}"/>
   <xacro:property name="I_wheel" value="${(1.0/12.0) * wheel_mass * (3.0 * wheel_link_radius * wheel_link_radius + wheel_link_length * wheel_link_length)}"/>
 
-  <!-- Gazebo definitions -->
-  <xacro:include filename="$(find robot_model_pkg)/urdf/robot.gazebo"/>
+  <!-- Comment out the gazebo include for now -->
+  <!-- <xacro:include filename="/ros2_ws/src/urdf_ex/urdf/robot.gazebo"/> -->
 
   <!-- Dummy link -->
-  <link name="dummy"/>
+  <link name="base_link"/>
 
   <!-- Body link -->
   <link name="body_link">
@@ -42,77 +63,96 @@
       <geometry>
         <box size="${body_link_x_dim} ${body_link_y_dim} ${body_link_z_dim}"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 ${pi}" xyz="0 0 0"/>
     </visual>
 
     <collision>
       <geometry>
         <box size="${body_link_x_dim} ${body_link_y_dim} ${body_link_z_dim}"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 ${pi}" xyz="0 0 0"/>
     </collision>
 
     <inertial>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 ${pi}" xyz="0 0 0"/>
       <mass value="${body_mass}"/>
-      <inertia 
-        ixx="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_z_dim*body_link_z_dim)}"
-        ixy="0" ixz="0"
-        iyy="${(1.0/12.0)*body_mass*(body_link_x_dim*body_link_x_dim + body_link_z_dim*body_link_z_dim)}"
-        iyz="0"
-        izz="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_x_dim*body_link_x_dim)}"/>
+      <inertia ixx="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_z_dim*body_link_z_dim)}" ixy="0" ixz="0" iyy="${(1.0/12.0)*body_mass*(body_link_x_dim*body_link_x_dim + body_link_z_dim*body_link_z_dim)}" iyz="0" izz="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_x_dim*body_link_x_dim)}"/>
     </inertial>
   </link>
 
   <!-- Fixed joint between dummy and body -->
-  <joint name="dummy_joint" type="fixed">
-    <parent link="dummy"/>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
     <child link="body_link"/>
+    <origin xyz="0 0 0.25"/>
   </joint>
 
   <!-- Wheel macro -->
-  <xacro:macro name="wheel" params="name x y z joint_type">
+  <xacro:macro name="wheel" params="name x y z joint_type rpy axis">
     <link name="${name}">
       <visual>
-        <!-- TODO: Complete -->
+        <geometry>
+          <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="blue" />
       </visual>
 
       <collision>
-        <!-- TODO: Complete -->
+        <geometry>
+          <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
       </collision>
 
       <inertial>
-        <!-- TODO: Complete -->
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${Iz_wheel}"/>
+      </inertial>
     </link>
 
     <joint name="${name}_joint" type="${joint_type}">
-      <!-- TODO: Complete -->
+      <parent link="body_link"/>
+      <child link="${name}"/>
+      <origin xyz="${x} ${y} ${z}" rpy="${rpy}"/>
+      <axis xyz="${axis}"/>
       <limit effort="1000" velocity="1000"/>
       <dynamics damping="1.0" friction="1.0"/>
     </joint>
   </xacro:macro>
 
   <!-- Instantiate wheels -->
-  <xacro:wheel name="rear_right_wheel"  x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" joint_type="continuous"/>
-  <!-- TODO: Complete: Wheels must be named - rear_left_wheel, front_right_wheel, front_left_wheel -->
+  <xacro:wheel name="rear_right_wheel" x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" rpy="${pi/2} 0 0" axis="0 0 -1" joint_type="continuous"/>
+  <xacro:wheel name="rear_left_wheel" x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" y="${body_link_y_dim/2 + 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" rpy="-${pi/2} 0 0" axis="0 0 1" joint_type="continuous"/>
+  <xacro:wheel name="front_right_wheel" x="${body_link_x_dim/2 - 1.2*wheel_link_radius}" y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" rpy="${pi/2} 0 0" axis="0 0 -1" joint_type="continuous"/>
+  <xacro:wheel name="front_left_wheel" x="${body_link_x_dim/2 - 1.2*wheel_link_radius}" y="${body_link_y_dim/2 + 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" rpy="-${pi/2} 0 0" axis="0 0 1" joint_type="continuous"/>
 
-<!-- Camera -->
+  <!-- Camera -->
   <link name="camera_link">
     <visual>
-      <geometry><box size="${sensor_side} ${sensor_side} ${sensor_side}"/></geometry>
-      <origin rpy="0 0 0" xyz="0 0 0" />
+        <origin xyz="0 0 0"/>
+        <geometry>
+            <cylinder radius="${sensor_side/4}" length="${sensor_side}"/>
+        </geometry>
+        <material name="black"/>
+    </visual>
+    <visual>
+      <geometry>
+        <box size="${sensor_side} ${sensor_side} ${sensor_side}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${sensor_side}" />
     </visual>
     <collision>
-      <geometry><box size="${sensor_side} ${sensor_side} ${sensor_side}"/></geometry>
+      <geometry>
+        <box size="${sensor_side} ${sensor_side} ${sensor_side}"/>
+      </geometry>
       <origin rpy="0 0 0" xyz="0 0 0" />
     </collision>
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="${sensor_mass}"/>
-      <inertia 
-        ixx="1e-6" ixy="0.0" ixz="0.0"
-        iyy="1e-6" iyz="0.0"
-        izz="1e-6"/>
+      <inertia ixx="1e-6" ixy="0.0" ixz="0.0" iyy="1e-6" iyz="0.0" izz="1e-6"/>
     </inertial>
   </link>
 
@@ -123,23 +163,40 @@
     <axis xyz="0 1 0" />
   </joint>
 
-
-  <!-- Sonar -->
+  <!-- Sonar  -->
   <link name="sonar_link">
-    <!-- TODO: Complete -->
+    <visual>
+      <geometry>
+        <box size="${sensor_side} ${2*sensor_side} ${sensor_side}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${sensor_side/2}" />
+      <material name="black" />
+    </visual>
+    <visual>
+      <geometry>
+        <box size="${sensor_side/2} ${sensor_side/2} ${sensor_side}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <material name="black" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${sensor_side} ${sensor_side} ${sensor_side}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+    </collision>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${sensor_mass}"/>
+      <inertia ixx="1e-6" ixy="0.0" ixz="0.0" iyy="1e-6" iyz="0.0" izz="1e-6"/>
+    </inertial>
   </link>
 
   <joint name="sonar_joint" type="fixed">
-    <!-- TODO: Complete -->
-  </joint>
-
-  <!-- Lidar -->
-  <link name="lidar_link">
-    <!-- TODO: Complete -->
-  </link>
-
-  <joint name="lidar_joint" type="fixed">
-    <!-- TODO: Complete -->
+    <parent link="body_link"/>
+    <child link="sonar_link"/>
+    <origin xyz="${body_link_x_dim/2 - sensor_side/4} 0 ${body_link_z_dim/2 + sensor_side/2}"/>
+    <axis xyz="0 1 0" />
   </joint>
 
 </robot>
