@@ -1,18 +1,66 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="four_wheel_robot">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="artistic_four_wheel_robot">
 
-  <!-- Body dimensions -->
-  <xacro:property name="body_link_x_dim" value="1"/>
-  <xacro:property name="body_link_y_dim" value="0.6"/>
-  <xacro:property name="body_link_z_dim" value="0.3"/>
+  <!-- ======================= ARTISTIC MATERIAL PALETTE ======================= -->
+  <material name="cyber_blue">
+    <color rgba="0.1 0.8 1.0 0.9" />
+  </material>
 
-  <!-- Wheel dimensions -->
-  <xacro:property name="wheel_link_radius" value="0.15"/>
-  <xacro:property name="wheel_link_length" value="0.1"/>
-  <xacro:property name="wheel_link_z_location" value="-0.1"/>
+  <material name="neon_pink">
+    <color rgba="1.0 0.2 0.6 1.0"/>
+  </material>
+
+  <material name="electric_purple">
+    <color rgba="0.6 0.1 1.0 0.95"/>
+  </material>
+
+  <material name="chrome_silver">
+    <color rgba="0.8 0.9 1.0 1.0"/>
+  </material>
+
+  <material name="laser_green">
+    <color rgba="0.2 1.0 0.3 0.9"/>
+  </material>
+
+  <material name="sunset_orange">
+    <color rgba="1.0 0.5 0.1 1.0"/>
+  </material>
+
+  <material name="deep_space_black">
+    <color rgba="0.05 0.05 0.15 1.0"/>
+  </material>
+
+  <material name="golden_yellow">
+    <color rgba="1.0 0.9 0.2 1.0"/>
+  </material>
+
+  <material name="plasma_red">
+    <color rgba="1.0 0.1 0.3 0.95"/>
+  </material>
+
+  <material name="holographic_white">
+    <color rgba="0.95 0.98 1.0 0.9"/>
+  </material>
+
+  <!-- ======================= ROBOT PARAMETERS ======================= -->
+  
+  <!-- Body dimensions - slightly larger for more presence -->
+  <xacro:property name="body_link_x_dim" value="1.2"/>
+  <xacro:property name="body_link_y_dim" value="0.8"/>
+  <xacro:property name="body_link_z_dim" value="0.35"/>
+
+  <!-- Wheel dimensions - larger for better aesthetics -->
+  <xacro:property name="wheel_link_radius" value="0.18"/>
+  <xacro:property name="wheel_link_length" value="0.12"/>
+  <xacro:property name="wheel_link_z_location" value="-0.12"/>
 
   <!-- Sensor dimensions -->
-  <xacro:property name="sensor_side" value="0.05"/>
+  <xacro:property name="sensor_side" value="0.06"/>
+
+  <!-- Decorative element dimensions -->
+  <xacro:property name="antenna_height" value="0.25"/>
+  <xacro:property name="wing_span" value="0.4"/>
+  <xacro:property name="light_strip_height" value="0.02"/>
 
   <!-- Material density -->
   <xacro:property name="body_density" value="2710.0"/>
@@ -21,28 +69,70 @@
   <!-- PI Constant -->
   <xacro:property name="pi_const" value="3.14159265"/>
 
-  <!-- Robot body and wheel mass -->
-  <xacro:property name="sensor_mass" value="0.5"/>
+  <!-- Mass calculations -->
+  <xacro:property name="sensor_mass" value="0.3"/>
+  <xacro:property name="decorative_mass" value="0.1"/>
   <xacro:property name="body_mass" value="${body_density * body_link_x_dim * body_link_y_dim * body_link_z_dim}"/>
   <xacro:property name="wheel_mass" value="${wheel_density * pi_const * wheel_link_radius * wheel_link_radius * wheel_link_length}"/>
 
-  <!-- Moments of inertia of the wheel -->
+  <!-- Moments of inertia -->
   <xacro:property name="Iz_wheel" value="${0.5 * wheel_mass * wheel_link_radius * wheel_link_radius}"/>
   <xacro:property name="I_wheel" value="${(1.0/12.0) * wheel_mass * (3.0 * wheel_link_radius * wheel_link_radius + wheel_link_length * wheel_link_length)}"/>
 
-  <!-- Gazebo definitions -->
-  <xacro:include filename="$(find robot_model_pkg)/urdf/robot.gazebo"/>
+  <!-- ======================= BASE LINKS ======================= -->
+  
+  <link name="base_link"/>
 
-  <!-- Dummy link -->
-  <link name="dummy"/>
-
-  <!-- Body link -->
+  <!-- Artistic main body with layered design -->
   <link name="body_link">
+    <!-- Main chassis -->
     <visual>
       <geometry>
         <box size="${body_link_x_dim} ${body_link_y_dim} ${body_link_z_dim}"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="cyber_blue"/>
+    </visual>
+
+    <!-- Top decorative layer -->
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 0.9} ${body_link_y_dim * 0.85} ${body_link_z_dim * 0.15}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 ${body_link_z_dim * 0.45}"/>
+      <material name="electric_purple"/>
+    </visual>
+
+    <!-- Racing stripes -->
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 1.05} ${body_link_y_dim * 0.1} ${body_link_z_dim * 0.02}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 ${body_link_y_dim * 0.2} ${body_link_z_dim * 0.52}"/>
+      <material name="neon_pink"/>
+    </visual>
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 1.05} ${body_link_y_dim * 0.1} ${body_link_z_dim * 0.02}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 ${-body_link_y_dim * 0.2} ${body_link_z_dim * 0.52}"/>
+      <material name="neon_pink"/>
+    </visual>
+
+    <!-- Side accent panels -->
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 0.15} ${body_link_y_dim * 1.1} ${body_link_z_dim * 0.8}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="${body_link_x_dim * 0.4} 0 0"/>
+      <material name="laser_green"/>
+    </visual>
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 0.15} ${body_link_y_dim * 1.1} ${body_link_z_dim * 0.8}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="${-body_link_x_dim * 0.4} 0 0"/>
+      <material name="sunset_orange"/>
     </visual>
 
     <collision>
@@ -55,91 +145,406 @@
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="${body_mass}"/>
-      <inertia 
-        ixx="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_z_dim*body_link_z_dim)}"
-        ixy="0" ixz="0"
-        iyy="${(1.0/12.0)*body_mass*(body_link_x_dim*body_link_x_dim + body_link_z_dim*body_link_z_dim)}"
-        iyz="0"
-        izz="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_x_dim*body_link_x_dim)}"/>
+      <inertia ixx="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_z_dim*body_link_z_dim)}" 
+               ixy="0" ixz="0" 
+               iyy="${(1.0/12.0)*body_mass*(body_link_x_dim*body_link_x_dim + body_link_z_dim*body_link_z_dim)}" 
+               iyz="0" 
+               izz="${(1.0/12.0)*body_mass*(body_link_y_dim*body_link_y_dim + body_link_x_dim*body_link_x_dim)}"/>
     </inertial>
   </link>
 
-  <!-- Fixed joint between dummy and body -->
-  <joint name="dummy_joint" type="fixed">
-    <parent link="dummy"/>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
     <child link="body_link"/>
+    <origin xyz="0 0 0.3"/>
   </joint>
 
-  <!-- Wheel macro -->
-  <xacro:macro name="wheel" params="name x y z joint_type">
+  <!-- ======================= ARTISTIC WHEEL MACRO ======================= -->
+  
+  <xacro:macro name="artistic_wheel" params="name x y z joint_type rpy axis color">
     <link name="${name}">
+      <!-- Main wheel -->
       <visual>
-        <!-- TODO: Complete -->
+        <geometry>
+          <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="${color}" />
+      </visual>
+
+      <!-- Wheel rim accents -->
+      <visual>
+        <geometry>
+          <cylinder radius="${wheel_link_radius * 1.05}" length="${wheel_link_length * 0.1}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${wheel_link_length * 0.4}"/>
+        <material name="chrome_silver" />
+      </visual>
+      <visual>
+        <geometry>
+          <cylinder radius="${wheel_link_radius * 1.05}" length="${wheel_link_length * 0.1}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${-wheel_link_length * 0.4}"/>
+        <material name="chrome_silver" />
+      </visual>
+
+      <!-- Spoke design -->
+      <visual>
+        <geometry>
+          <box size="${wheel_link_radius * 1.8} ${wheel_link_radius * 0.1} ${wheel_link_length * 0.05}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="golden_yellow" />
+      </visual>
+      <visual>
+        <geometry>
+          <box size="${wheel_link_radius * 0.1} ${wheel_link_radius * 1.8} ${wheel_link_length * 0.05}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="golden_yellow" />
       </visual>
 
       <collision>
-        <!-- TODO: Complete -->
+        <geometry>
+          <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
       </collision>
 
       <inertial>
-        <!-- TODO: Complete -->
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${I_wheel}" ixy="0" ixz="0" 
+                 iyy="${I_wheel}" iyz="0" 
+                 izz="${Iz_wheel}"/>
+      </inertial>
     </link>
 
     <joint name="${name}_joint" type="${joint_type}">
-      <!-- TODO: Complete -->
+      <parent link="body_link"/>
+      <child link="${name}"/>
+      <origin xyz="${x} ${y} ${z}" rpy="${rpy}"/>
+      <axis xyz="${axis}"/>
       <limit effort="1000" velocity="1000"/>
       <dynamics damping="1.0" friction="1.0"/>
     </joint>
   </xacro:macro>
 
-  <!-- Instantiate wheels -->
-  <xacro:wheel name="rear_right_wheel"  x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" z="${wheel_link_z_location}" joint_type="continuous"/>
-  <!-- TODO: Complete: Wheels must be named - rear_left_wheel, front_right_wheel, front_left_wheel -->
+  <!-- ======================= ARTISTIC WHEEL INSTANTIATION ======================= -->
+  
+  <xacro:artistic_wheel name="rear_right_wheel" 
+                       x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" 
+                       y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" 
+                       z="${wheel_link_z_location}" 
+                       rpy="${pi_const/2} 0 0" 
+                       axis="0 0 -1" 
+                       joint_type="continuous"
+                       color="plasma_red"/>
+               
+  <xacro:artistic_wheel name="rear_left_wheel" 
+                       x="${-body_link_x_dim/2 + 1.2*wheel_link_radius}" 
+                       y="${body_link_y_dim/2 + 1.2*wheel_link_length/2}" 
+                       z="${wheel_link_z_location}" 
+                       rpy="-${pi_const/2} 0 0" 
+                       axis="0 0 1" 
+                       joint_type="continuous"
+                       color="plasma_red"/>
 
-<!-- Camera -->
+  <xacro:artistic_wheel name="front_right_wheel" 
+                       x="${body_link_x_dim/2 - 1.2*wheel_link_radius}" 
+                       y="${-body_link_y_dim/2 - 1.2*wheel_link_length/2}" 
+                       z="${wheel_link_z_location}" 
+                       rpy="${pi_const/2} 0 0" 
+                       axis="0 0 -1" 
+                       joint_type="continuous"
+                       color="electric_purple"/>
+               
+  <xacro:artistic_wheel name="front_left_wheel" 
+                       x="${body_link_x_dim/2 - 1.2*wheel_link_radius}" 
+                       y="${body_link_y_dim/2 + 1.2*wheel_link_length/2}" 
+                       z="${wheel_link_z_location}" 
+                       rpy="-${pi_const/2} 0 0" 
+                       axis="0 0 1" 
+                       joint_type="continuous"
+                       color="electric_purple"/>
+
+  <!-- ======================= ARTISTIC SENSORS ======================= -->
+  
+  <!-- Futuristic Camera Eye -->
   <link name="camera_link">
+    <!-- Main camera housing -->
     <visual>
-      <geometry><box size="${sensor_side} ${sensor_side} ${sensor_side}"/></geometry>
+      <geometry>
+        <sphere radius="${sensor_side}"/>
+      </geometry>
       <origin rpy="0 0 0" xyz="0 0 0" />
+      <material name="deep_space_black"/>
     </visual>
+    
+    <!-- Camera lens -->
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side * 0.7}" length="${sensor_side * 0.2}"/>
+      </geometry>
+      <origin xyz="${sensor_side * 0.9} 0 0" rpy="0 ${pi_const/2} 0"/>
+      <material name="cyber_blue"/>
+    </visual>
+
+    <!-- Lens ring -->
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side * 0.8}" length="${sensor_side * 0.1}"/>
+      </geometry>
+      <origin xyz="${sensor_side * 1.05} 0 0" rpy="0 ${pi_const/2} 0"/>
+      <material name="chrome_silver"/>
+    </visual>
+
     <collision>
-      <geometry><box size="${sensor_side} ${sensor_side} ${sensor_side}"/></geometry>
+      <geometry>
+        <sphere radius="${sensor_side}"/>
+      </geometry>
       <origin rpy="0 0 0" xyz="0 0 0" />
     </collision>
+
     <inertial>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="${sensor_mass}"/>
-      <inertia 
-        ixx="1e-6" ixy="0.0" ixz="0.0"
-        iyy="1e-6" iyz="0.0"
-        izz="1e-6"/>
+      <inertia ixx="1e-6" ixy="0.0" ixz="0.0" 
+               iyy="1e-6" iyz="0.0" 
+               izz="1e-6"/>
     </inertial>
   </link>
 
   <joint name="camera_joint" type="fixed">
     <parent link="body_link"/>
     <child link="camera_link"/>
-    <origin xyz="${-body_link_x_dim/4} 0 ${body_link_z_dim/2 + sensor_side/2}"/>
-    <axis xyz="0 1 0" />
+    <origin xyz="${-body_link_x_dim/3} 0 ${body_link_z_dim/2 + sensor_side}"/>
   </joint>
 
-
-  <!-- Sonar -->
+  <!-- Stylized Sonar Array -->
   <link name="sonar_link">
-    <!-- TODO: Complete -->
+    <!-- Main sonar housing -->
+    <visual>
+      <geometry>
+        <box size="${sensor_side * 1.5} ${sensor_side * 3} ${sensor_side}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <material name="laser_green" />
+    </visual>
+    
+    <!-- Sonar transducers -->
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side/3}" length="${sensor_side * 0.5}"/>
+      </geometry>
+      <origin rpy="0 ${pi_const/2} 0" xyz="${sensor_side * 0.8} ${sensor_side} 0" />
+      <material name="golden_yellow" />
+    </visual>
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side/3}" length="${sensor_side * 0.5}"/>
+      </geometry>
+      <origin rpy="0 ${pi_const/2} 0" xyz="${sensor_side * 0.8} 0 0" />
+      <material name="golden_yellow" />
+    </visual>
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side/3}" length="${sensor_side * 0.5}"/>
+      </geometry>
+      <origin rpy="0 ${pi_const/2} 0" xyz="${sensor_side * 0.8} ${-sensor_side} 0" />
+      <material name="golden_yellow" />
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="${sensor_side * 1.5} ${sensor_side * 3} ${sensor_side}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+    </collision>
+
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${sensor_mass}"/>
+      <inertia ixx="1e-6" ixy="0.0" ixz="0.0" 
+               iyy="1e-6" iyz="0.0" 
+               izz="1e-6"/>
+    </inertial>
   </link>
 
   <joint name="sonar_joint" type="fixed">
-    <!-- TODO: Complete -->
+    <parent link="body_link"/>
+    <child link="sonar_link"/>
+    <origin xyz="${body_link_x_dim/2 + sensor_side/2} 0 ${body_link_z_dim/2}"/>
   </joint>
 
-  <!-- Lidar -->
-  <link name="lidar_link">
-    <!-- TODO: Complete -->
+  <!-- ======================= CREATIVE DECORATIVE ELEMENTS ======================= -->
+
+  <!-- Communication Antennas -->
+  <link name="antenna_left">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="${antenna_height}"/>
+      </geometry>
+      <origin xyz="0 0 ${antenna_height/2}" rpy="0 0 0"/>
+      <material name="chrome_silver"/>
+    </visual>
+    <!-- Antenna tip -->
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <origin xyz="0 0 ${antenna_height}" rpy="0 0 0"/>
+      <material name="neon_pink"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
   </link>
 
-  <joint name="lidar_joint" type="fixed">
-    <!-- TODO: Complete -->
+  <joint name="antenna_left_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="antenna_left"/>
+    <origin xyz="${-body_link_x_dim/4} ${body_link_y_dim/3} ${body_link_z_dim/2}"/>
+  </joint>
+
+  <link name="antenna_right">
+    <visual>
+      <geometry>
+        <cylinder radius="0.01" length="${antenna_height}"/>
+      </geometry>
+      <origin xyz="0 0 ${antenna_height/2}" rpy="0 0 0"/>
+      <material name="chrome_silver"/>
+    </visual>
+    <!-- Antenna tip -->
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <origin xyz="0 0 ${antenna_height}" rpy="0 0 0"/>
+      <material name="laser_green"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="antenna_right_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="antenna_right"/>
+    <origin xyz="${-body_link_x_dim/4} ${-body_link_y_dim/3} ${body_link_z_dim/2}"/>
+  </joint>
+
+  <!-- LED Light Strips -->
+  <link name="led_strip_front">
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 0.8} ${light_strip_height} ${light_strip_height}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="holographic_white"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass/2}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="led_strip_front_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="led_strip_front"/>
+    <origin xyz="0 ${body_link_y_dim/2 + light_strip_height} ${body_link_z_dim/3}"/>
+  </joint>
+
+  <link name="led_strip_rear">
+    <visual>
+      <geometry>
+        <box size="${body_link_x_dim * 0.8} ${light_strip_height} ${light_strip_height}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="plasma_red"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass/2}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="led_strip_rear_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="led_strip_rear"/>
+    <origin xyz="0 ${-body_link_y_dim/2 - light_strip_height} ${body_link_z_dim/3}"/>
+  </joint>
+
+  <!-- Decorative Wings/Fins -->
+  <link name="wing_left">
+    <visual>
+      <geometry>
+        <box size="${wing_span * 0.3} ${wing_span} ${wing_span * 0.05}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 ${pi_const/6}"/>
+      <material name="sunset_orange"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="wing_left_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="wing_left"/>
+    <origin xyz="${-body_link_x_dim/3} ${body_link_y_dim/2 + wing_span/4} ${body_link_z_dim/4}"/>
+  </joint>
+
+  <link name="wing_right">
+    <visual>
+      <geometry>
+        <box size="${wing_span * 0.3} ${wing_span} ${wing_span * 0.05}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 ${-pi_const/6}"/>
+      <material name="laser_green"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="wing_right_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="wing_right"/>
+    <origin xyz="${-body_link_x_dim/3} ${-body_link_y_dim/2 - wing_span/4} ${body_link_z_dim/4}"/>
+  </joint>
+
+  <!-- Central Holographic Display -->
+  <link name="holo_display">
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side * 1.5}" length="${sensor_side/4}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="cyber_blue"/>
+    </visual>
+    <!-- Display screen -->
+    <visual>
+      <geometry>
+        <cylinder radius="${sensor_side * 1.3}" length="${sensor_side/8}"/>
+      </geometry>
+      <origin xyz="0 0 ${sensor_side/6}" rpy="0 0 0"/>
+      <material name="holographic_white"/>
+    </visual>
+    <inertial>
+      <mass value="${decorative_mass}"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="holo_display_joint" type="fixed">
+    <parent link="body_link"/>
+    <child link="holo_display"/>
+    <origin xyz="0 0 ${body_link_z_dim/2 + sensor_side/3}"/>
   </joint>
 
 </robot>
