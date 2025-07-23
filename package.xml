@@ -4,7 +4,7 @@
   <name>robot_model_pkg</name>
   <version>1.0.0</version>
   <description>Four-wheeled robot with sensors for autonomous navigation</description>
-  <maintainer email="your.email@example.com">Your Name</maintainer>
+  <maintainer email="dinith.22@cse.mrt.ac.lk">Dinith Chameera</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
