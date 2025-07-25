@@ -1,0 +1,48 @@
+[0.088s] Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /urdf_ex -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/urdf_ex/install/urdf_ex
+[0.117s] -- Found ament_cmake: 0.9.12 (/opt/ros/foxy/share/ament_cmake/cmake)
+[0.161s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[0.481s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.544s] -- Found ament_lint_auto: 0.9.8 (/opt/ros/foxy/share/ament_lint_auto/cmake)
+[0.769s] -- Added test 'copyright' to check source files copyright and LICENSE
+[1.155s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[1.156s] -- Configured cppcheck include dirs: 
+[1.160s] -- Configured cppcheck exclude dirs and/or files: 
+[1.473s] -- Added test 'cpplint' to check C / C++ code against the Google style
+[1.475s] -- Configured cpplint exclude dirs and/or files: 
+[1.507s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.581s] -- Added test 'lint_cmake' to check CMake code style
+[1.615s] -- Added test 'pep257' to check Python code against some of the style conventions in PEP 257
+[1.876s] -- Added test 'uncrustify' to check C / C++ code style
+[1.878s] -- Configured uncrustify additional arguments: 
+[1.910s] -- Added test 'xmllint' to check XML markup files
+[1.938s] -- Configuring done
+[2.021s] -- Generating done
+[2.070s] -- Build files have been written to: /urdf_ex/build/urdf_ex
+[2.073s] Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /urdf_ex -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/urdf_ex/install/urdf_ex
+[2.090s] Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+[2.183s] Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+[2.267s] Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex
+[2.290s] -- Install configuration: ""
+[2.296s] -- Execute custom install script
+[2.302s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex//launch/simulation.launch.py
+[2.330s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.gazebo
+[2.350s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.xacro
+[2.372s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/four_walls.world
+[2.398s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/gazebo_four_walls.world
+[2.420s] -- Symlinking: /urdf_ex/install/urdf_ex/lib/urdf_ex/random_wanderer.py
+[2.446s] -- Symlinking: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/package_run_dependencies/urdf_ex
+[2.471s] -- Symlinking: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/parent_prefix_path/urdf_ex
+[2.494s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.sh
+[2.516s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.dsv
+[2.543s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.sh
+[2.570s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.dsv
+[2.593s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.bash
+[2.620s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.sh
+[2.649s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.zsh
+[2.671s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.dsv
+[2.698s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/package.dsv
+[2.722s] -- Symlinking: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/packages/urdf_ex
+[2.744s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig.cmake
+[2.770s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig-version.cmake
+[2.798s] -- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/package.xml
+[2.823s] Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex

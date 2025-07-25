@@ -1,0 +1,8 @@
+source;share/urdf_ex/hook/cmake_prefix_path.ps1
+source;share/urdf_ex/hook/cmake_prefix_path.dsv
+source;share/urdf_ex/hook/cmake_prefix_path.sh
+source;share/urdf_ex/local_setup.bash
+source;share/urdf_ex/local_setup.dsv
+source;share/urdf_ex/local_setup.ps1
+source;share/urdf_ex/local_setup.sh
+source;share/urdf_ex/local_setup.zsh

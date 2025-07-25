@@ -1,0 +1,6 @@
+Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /urdf_ex -DCMAKE_INSTALL_PREFIX=/urdf_ex/install/urdf_ex
+Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake /urdf_ex -DCMAKE_INSTALL_PREFIX=/urdf_ex/install/urdf_ex
+Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex
+Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex

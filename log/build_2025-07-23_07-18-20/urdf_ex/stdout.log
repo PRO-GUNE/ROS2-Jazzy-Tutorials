@@ -1,0 +1,24 @@
+-- Install configuration: ""
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//launch
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//launch/simulation.launch.py
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.gazebo
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.xacro
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/gazebo_four_walls.world
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/four_walls.world
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/package_run_dependencies/urdf_ex
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/parent_prefix_path/urdf_ex
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.sh
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.dsv
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.sh
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.dsv
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.bash
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.sh
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.zsh
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.dsv
+-- Installing: /urdf_ex/install/urdf_ex/share/urdf_ex/package.dsv
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/packages/urdf_ex
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig.cmake
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig-version.cmake
+-- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/package.xml

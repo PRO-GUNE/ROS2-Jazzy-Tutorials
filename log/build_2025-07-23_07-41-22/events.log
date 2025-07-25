@@ -1,0 +1,57 @@
+[0.000000] (-) TimerEvent: {}
+[0.023051] (urdf_ex) JobQueued: {'identifier': 'urdf_ex', 'dependencies': OrderedDict()}
+[0.024779] (urdf_ex) JobStarted: {'identifier': 'urdf_ex'}
+[0.057830] (-) TimerEvent: {}
+[0.162666] (-) TimerEvent: {}
+[0.165462] (urdf_ex) JobProgress: {'identifier': 'urdf_ex', 'progress': 'cmake'}
+[0.200670] (urdf_ex) JobProgress: {'identifier': 'urdf_ex', 'progress': 'build'}
+[0.214682] (urdf_ex) Command: {'cmd': ['/usr/bin/cmake', '--build', '/urdf_ex/build/urdf_ex', '--', '-j4', '-l4'], 'cwd': '/urdf_ex/build/urdf_ex', 'env': OrderedDict([('HOSTNAME', 'docker-desktop'), ('GIT_ASKPASS', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/bin/helpers/browser.sh'), ('HOME', '/home/ubuntu'), ('DISABLE_AUTO_UPDATE', 'true'), ('TERM_PROGRAM_VERSION', '0.50.5'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-62fa53fb-46e4-4834-9195-0b717fad7a59.sock'), ('ROS_PYTHON_VERSION', '3'), ('PAGER', 'head -n 10000 | cat'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/node'), ('COLORTERM', 'truecolor'), ('ROS_DISTRO', 'foxy'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/bin/remote-cli:/opt/ros/foxy/bin:/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':1'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/vscode-git-6f8e10bf80.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/cursor-remote-ssh-067ff404-ea00-4a58-9b82-eeb66f046346.sock'), ('AMENT_PREFIX_PATH', '/opt/ros/foxy'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/urdf_ex/build/urdf_ex'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/foxy')]), 'shell': False}
+[0.333335] (-) TimerEvent: {}
+[0.439077] (-) TimerEvent: {}
+[0.543861] (-) TimerEvent: {}
+[0.581428] (urdf_ex) CommandEnded: {'returncode': 0}
+[0.650464] (-) TimerEvent: {}
+[0.756986] (-) TimerEvent: {}
+[0.837961] (urdf_ex) JobProgress: {'identifier': 'urdf_ex', 'progress': 'install'}
+[0.858303] (-) TimerEvent: {}
+[0.881664] (urdf_ex) Command: {'cmd': ['/usr/bin/cmake', '--install', '/urdf_ex/build/urdf_ex'], 'cwd': '/urdf_ex/build/urdf_ex', 'env': OrderedDict([('HOSTNAME', 'docker-desktop'), ('GIT_ASKPASS', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib'), ('BROWSER', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/bin/helpers/browser.sh'), ('HOME', '/home/ubuntu'), ('DISABLE_AUTO_UPDATE', 'true'), ('TERM_PROGRAM_VERSION', '0.50.5'), ('VSCODE_IPC_HOOK_CLI', '/tmp/vscode-ipc-62fa53fb-46e4-4834-9195-0b717fad7a59.sock'), ('ROS_PYTHON_VERSION', '3'), ('PAGER', 'head -n 10000 | cat'), ('VSCODE_GIT_ASKPASS_MAIN', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/node'), ('COLORTERM', 'truecolor'), ('ROS_DISTRO', 'foxy'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm-256color'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/bin/remote-cli:/opt/ros/foxy/bin:/home/ubuntu/.cursor-server/bin/96e5b01ca25f8fbd4c4c10bc69b15f6228c80770/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':1'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/tmp/vscode-git-6f8e10bf80.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/cursor-remote-ssh-067ff404-ea00-4a58-9b82-eeb66f046346.sock'), ('AMENT_PREFIX_PATH', '/opt/ros/foxy'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/urdf_ex/build/urdf_ex'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/foxy/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/foxy')]), 'shell': False}
+[0.959606] (-) TimerEvent: {}
+[0.988612] (urdf_ex) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[1.006664] (urdf_ex) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[1.048543] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex//launch/simulation.launch.py\n'}
+[1.060383] (-) TimerEvent: {}
+[1.090319] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.gazebo\n'}
+[1.134289] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.xacro\n'}
+[1.156680] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/four_walls.world\n'}
+[1.162653] (-) TimerEvent: {}
+[1.165502] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/gazebo_four_walls.world\n'}
+[1.172803] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/lib/urdf_ex/random_wanderer.py\n'}
+[1.192417] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/package_run_dependencies/urdf_ex\n'}
+[1.204411] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/parent_prefix_path/urdf_ex\n'}
+[1.215060] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.sh\n'}
+[1.231231] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.dsv\n'}
+[1.243465] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.sh\n'}
+[1.273205] (-) TimerEvent: {}
+[1.311212] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.dsv\n'}
+[1.340389] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.bash\n'}
+[1.370058] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.sh\n'}
+[1.380452] (-) TimerEvent: {}
+[1.382949] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.zsh\n'}
+[1.400516] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.dsv\n'}
+[1.409185] (urdf_ex) StdoutLine: {'line': b'-- Symlinking: /urdf_ex/install/urdf_ex/share/urdf_ex/package.dsv\n'}
+[1.479827] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/packages/urdf_ex\n'}
+[1.490654] (-) TimerEvent: {}
+[1.493951] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig.cmake\n'}
+[1.548123] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig-version.cmake\n'}
+[1.553269] (urdf_ex) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf_ex/install/urdf_ex/share/urdf_ex/package.xml\n'}
+[1.571723] (urdf_ex) CommandEnded: {'returncode': 0}
+[1.599517] (-) TimerEvent: {}
+[1.704874] (-) TimerEvent: {}
+[1.821061] (-) TimerEvent: {}
+[1.923283] (-) TimerEvent: {}
+[2.039395] (-) TimerEvent: {}
+[2.147766] (-) TimerEvent: {}
+[2.252403] (-) TimerEvent: {}
+[2.355028] (-) TimerEvent: {}
+[2.391041] (urdf_ex) JobEnded: {'identifier': 'urdf_ex', 'rc': 0}
+[2.402812] (-) EventReactorShutdown: {}

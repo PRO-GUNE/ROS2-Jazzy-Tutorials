@@ -1,69 +1,65 @@
 <?xml version="1.0"?>
 <robot>
-
-  <!-- Body link properties -->
-  <gazebo reference="body_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+  <!-- Chassis friction and color -->
+  <gazebo reference="chassis">
+    <mu1>0.25</mu1>
+    <mu2>0.25</mu2>
     <material>Gazebo/Red</material>
   </gazebo>
 
-  <!-- Wheel properties - All wheels should have similar appearance in simulation -->
-  <gazebo reference="rear_right_wheel">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+  <!-- Wheel friction and color -->
+  <gazebo reference="rr_wheel">
+    <mu1>0.25</mu1>
+    <mu2>0.25</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="rl_wheel">
+    <mu1>0.25</mu1>
+    <mu2>0.25</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="fr_wheel">
+    <mu1>0.25</mu1>
+    <mu2>0.25</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="fl_wheel">
+    <mu1>0.25</mu1>
+    <mu2>0.25</mu2>
     <material>Gazebo/Yellow</material>
   </gazebo>
 
-  <gazebo reference="rear_left_wheel">
-    <!-- TODO: Complete -->
-  </gazebo>
-
-  <gazebo reference="front_right_wheel">
-    <!-- TODO: Complete -->
-  </gazebo>
-
-  <gazebo reference="front_left_wheel">
-    <!-- TODO: Complete -->
-  </gazebo>
-
-  <gazebo reference="sonar_link">
+  <!-- Sonar color -->
+  <gazebo reference="sonar_sensor">
     <material>Gazebo/Blue</material>
   </gazebo>
 
-  <!-- Skid-steer drive controller plugin -->
+  <!-- Differential drive plugin for four wheels -->
   <gazebo>
-    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
       <updateRate>100.0</updateRate>
       <robotNamespace></robotNamespace>
-
-      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
-      <!-- TODO: Give the correct joint values -->
-      <rightFrontJoint></rightFrontJoint>
-      <leftRearJoint></leftRearJoint>
-      <rightRearJoint></rightRearJoint>
-
-      <!-- Replace macros with numeric values if used outside xacro -->
+      <leftFrontJoint>fl_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>fr_wheel_joint</rightFrontJoint>
+      <leftRearJoint>rl_wheel_joint</leftRearJoint>
+      <rightRearJoint>rr_wheel_joint</rightRearJoint>
       <wheelSeparation>0.7</wheelSeparation>
-      <wheelDiameter>0.3</wheelDiameter> <!-- 2 * 0.15 radius -->
-
+      <wheelDiameter>0.3</wheelDiameter>
       <torque>1000</torque>
-
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>body_link</robotBaseFrame>
-
+      <robotBaseFrame>chassis</robotBaseFrame>
       <covariance_x>0.0001</covariance_x>
       <covariance_y>0.0001</covariance_y>
       <covariance_yaw>0.01</covariance_yaw>
     </plugin>
   </gazebo>
 
-  <!-- Camera -->
-  <gazebo reference="camera_link">
+  <!-- Camera sensor plugin -->
+  <gazebo reference="cam_link">
     <material>Gazebo/Green</material>
-    <sensor name="camera" type="camera">
+    <sensor name="main_camera" type="camera">
         <pose> 0 0 0 0 0 0 </pose>
         <visualize>true</visualize>
         <update_rate>10</update_rate>
@@ -79,16 +75,17 @@
                 <far>8.0</far>
             </clip>
         </camera>
-        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-            <frameName>camera_link_optical</frameName>
+        <plugin name="main_camera_controller" filename="libgazebo_ros_camera.so">
+            <frameName>cam_link_optical</frameName>
             <topicName>sensor/camera</topicName>
-            <cameraName>camera</cameraName>
+            <cameraName>main_camera</cameraName>
         </plugin>
     </sensor>
+  </gazebo>
 
-<!-- Sonar range measurement -->
-  <gazebo reference="sonar_link">
-    <sensor type="ray" name="sonar">
+  <!-- Sonar plugin -->
+  <gazebo reference="sonar_sensor">
+    <sensor type="ray" name="ultrasonic">
       <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
       <update_rate>50</update_rate>
@@ -113,9 +110,9 @@
             <resolution>0.02</resolution>
          </range>
       </ray>
-      <plugin name="gazebo_ros_range" filename="libgazebo_ros_range.so">
+      <plugin name="ultrasonic_plugin" filename="libgazebo_ros_range.so">
         <topicName>sensor/sonar</topicName>
-        <frameName>sonar_link</frameName>
+        <frameName>sonar_sensor</frameName>
         <alwaysOn>true</alwaysOn>
         <updateRate>50</updateRate>
         <gaussianNoise>0.005</gaussianNoise>
@@ -125,12 +122,9 @@
     </sensor>
   </gazebo>
 
-<!-- Lidar -->
-<gazebo reference="lidar_link">
-
-</gazebo>
-  <material>Gazebo/Red</material>
-  <sensor name="lidar" type="ray">
+  <!-- Lidar plugin -->
+  <gazebo reference="lidar_link">
+    <sensor name="main_lidar" type="ray">
       <pose> 0 0 0 0 0 0 </pose>
       <visualize>false</visualize>
       <update_rate>10</update_rate>
@@ -147,14 +141,14 @@
               <max>12</max>
           </range>
       </ray>
-      <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+      <plugin name="main_lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
           <ros>
               <argument>~/out:=scan</argument>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
-          <frameName>laser_frame</frameName>
+          <frameName>lidar_link_frame</frameName>
           <topicName>sensor/lidar</topicName>
       </plugin>
-  </sensor>
+    </sensor>
   </gazebo>
 </robot>

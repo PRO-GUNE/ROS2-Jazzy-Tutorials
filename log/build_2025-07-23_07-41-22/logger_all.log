@@ -1,0 +1,101 @@
+[1.270s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install']
+[1.271s] DEBUG:colcon:Parsed command line arguments: Namespace(ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f1186dcd940>>, merge_install=False, metas=['./colcon.meta'], mixin=None, mixin_files=None, mixin_verb=('build',), packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=4, paths=None, symlink_install=True, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f1186dcd940>, verb_name='build', verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7f1186dcdf10>)
+[1.424s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.434s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.435s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.442s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.444s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.444s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.445s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/urdf_ex'
+[1.457s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.459s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.461s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.466s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.474s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.475s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.477s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.484s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.487s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.616s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_cmake' and name 'urdf_ex'
+[1.617s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.618s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.626s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.629s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.630s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.730s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'cmake_args' from command line to 'None'
+[1.731s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'cmake_target' from command line to 'None'
+[1.733s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.742s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'cmake_clean_cache' from command line to 'False'
+[1.742s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'cmake_clean_first' from command line to 'False'
+[1.743s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'cmake_force_configure' from command line to 'False'
+[1.748s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'ament_cmake_args' from command line to 'None'
+[1.750s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'catkin_cmake_args' from command line to 'None'
+[1.751s] Level 5:colcon.colcon_core.verb:set package 'urdf_ex' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.753s] DEBUG:colcon.colcon_core.verb:Building package 'urdf_ex' with the following arguments: {'ament_cmake_args': None, 'build_base': '/urdf_ex/build/urdf_ex', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/urdf_ex/install/urdf_ex', 'merge_install': False, 'path': '/urdf_ex', 'symlink_install': True, 'test_result_base': None}
+[1.756s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.794s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.801s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/urdf_ex' with build type 'ament_cmake'
+[1.808s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/urdf_ex'
+[1.874s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.885s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.886s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.157s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+[2.478s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+[2.740s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex
+[3.408s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(urdf_ex)
+[3.424s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex
+[3.500s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex' for CMake module files
+[3.586s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex' for CMake config files
+[3.607s] Level 1:colcon.colcon_core.shell:create_environment_hook('urdf_ex', 'cmake_prefix_path')
+[3.613s] INFO:colcon.colcon_core.shell:Creating environment hook '/urdf_ex/install/urdf_ex/share/urdf_ex/hook/cmake_prefix_path.ps1'
+[3.626s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/urdf_ex/install/urdf_ex/share/urdf_ex/hook/cmake_prefix_path.dsv'
+[3.634s] INFO:colcon.colcon_core.shell:Creating environment hook '/urdf_ex/install/urdf_ex/share/urdf_ex/hook/cmake_prefix_path.sh'
+[3.656s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/lib'
+[3.663s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/bin'
+[3.668s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/lib/pkgconfig/urdf_ex.pc'
+[3.680s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/lib/python3.8/site-packages'
+[3.689s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/bin'
+[3.716s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.ps1'
+[3.727s] INFO:colcon.colcon_core.shell:Creating package descriptor '/urdf_ex/install/urdf_ex/share/urdf_ex/package.dsv'
+[3.748s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.sh'
+[3.780s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.bash'
+[3.805s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.zsh'
+[3.809s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/urdf_ex/install/urdf_ex/share/colcon-core/packages/urdf_ex)
+[4.010s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(urdf_ex)
+[4.027s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex' for CMake module files
+[4.066s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex' for CMake config files
+[4.078s] Level 1:colcon.colcon_core.shell:create_environment_hook('urdf_ex', 'cmake_prefix_path')
+[4.088s] INFO:colcon.colcon_core.shell:Creating environment hook '/urdf_ex/install/urdf_ex/share/urdf_ex/hook/cmake_prefix_path.ps1'
+[4.105s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/urdf_ex/install/urdf_ex/share/urdf_ex/hook/cmake_prefix_path.dsv'
+[4.114s] INFO:colcon.colcon_core.shell:Creating environment hook '/urdf_ex/install/urdf_ex/share/urdf_ex/hook/cmake_prefix_path.sh'
+[4.125s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/lib'
+[4.142s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/bin'
+[4.144s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/lib/pkgconfig/urdf_ex.pc'
+[4.147s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/lib/python3.8/site-packages'
+[4.152s] Level 1:colcon.colcon_core.environment:checking '/urdf_ex/install/urdf_ex/bin'
+[4.172s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.ps1'
+[4.180s] INFO:colcon.colcon_core.shell:Creating package descriptor '/urdf_ex/install/urdf_ex/share/urdf_ex/package.dsv'
+[4.188s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.sh'
+[4.199s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.bash'
+[4.209s] INFO:colcon.colcon_core.shell:Creating package script '/urdf_ex/install/urdf_ex/share/urdf_ex/package.zsh'
+[4.222s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/urdf_ex/install/urdf_ex/share/colcon-core/packages/urdf_ex)
+[4.227s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[4.236s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[4.237s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[4.237s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[4.283s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[4.286s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[4.289s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[4.293s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[4.350s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[4.356s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[4.374s] INFO:colcon.colcon_core.shell:Creating prefix script '/urdf_ex/install/local_setup.ps1'
+[4.387s] INFO:colcon.colcon_core.shell:Creating prefix util module '/urdf_ex/install/_local_setup_util_ps1.py'
+[4.415s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/urdf_ex/install/setup.ps1'
+[4.438s] INFO:colcon.colcon_core.shell:Creating prefix script '/urdf_ex/install/local_setup.sh'
+[4.446s] INFO:colcon.colcon_core.shell:Creating prefix util module '/urdf_ex/install/_local_setup_util_sh.py'
+[4.459s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/urdf_ex/install/setup.sh'
+[4.474s] INFO:colcon.colcon_core.shell:Creating prefix script '/urdf_ex/install/local_setup.bash'
+[4.486s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/urdf_ex/install/setup.bash'
+[4.494s] INFO:colcon.colcon_core.shell:Creating prefix script '/urdf_ex/install/local_setup.zsh'
+[4.505s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/urdf_ex/install/setup.zsh'

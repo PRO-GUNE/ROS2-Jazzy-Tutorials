@@ -1,0 +1,28 @@
+[0.070s] Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+[0.302s] Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --build /urdf_ex/build/urdf_ex -- -j4 -l4
+[0.379s] Invoking command in '/urdf_ex/build/urdf_ex': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex
+[0.398s] -- Install configuration: ""
+[0.401s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//launch
+[0.406s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//launch/simulation.launch.py
+[0.409s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf
+[0.410s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.gazebo
+[0.413s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//urdf/robot.xacro
+[0.415s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds
+[0.417s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/gazebo_four_walls.world
+[0.418s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex//worlds/four_walls.world
+[0.420s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/package_run_dependencies/urdf_ex
+[0.422s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/parent_prefix_path/urdf_ex
+[0.424s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.sh
+[0.426s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/ament_prefix_path.dsv
+[0.427s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.sh
+[0.429s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/environment/path.dsv
+[0.431s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.bash
+[0.432s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.sh
+[0.434s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.zsh
+[0.436s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/local_setup.dsv
+[0.440s] -- Installing: /urdf_ex/install/urdf_ex/share/urdf_ex/package.dsv
+[0.450s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/ament_index/resource_index/packages/urdf_ex
+[0.451s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig.cmake
+[0.453s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/cmake/urdf_exConfig-version.cmake
+[0.455s] -- Up-to-date: /urdf_ex/install/urdf_ex/share/urdf_ex/package.xml
+[0.465s] Invoked command in '/urdf_ex/build/urdf_ex' returned '0': CMAKE_PREFIX_PATH=/opt/ros/foxy /usr/bin/cmake --install /urdf_ex/build/urdf_ex
