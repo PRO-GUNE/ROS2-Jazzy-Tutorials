@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- Body link properties -->
+  <gazebo reference="body_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <!-- Wheel properties - All wheels should have similar appearance in simulation -->
+  <gazebo reference="rear_right_wheel">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="rear_left_wheel">
+    <!-- TODO: Complete -->
+  </gazebo>
+
+  <gazebo reference="front_right_wheel">
+    <!-- TODO: Complete -->
+  </gazebo>
+
+  <gazebo reference="front_left_wheel">
+    <!-- TODO: Complete -->
+  </gazebo>
+
+  <gazebo reference="sonar_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <!-- Skid-steer drive controller plugin -->
+  <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace></robotNamespace>
+
+      <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
+      <!-- TODO: Give the correct joint values -->
+      <rightFrontJoint></rightFrontJoint>
+      <leftRearJoint></leftRearJoint>
+      <rightRearJoint></rightRearJoint>
+
+      <!-- Replace macros with numeric values if used outside xacro -->
+      <wheelSeparation>0.7</wheelSeparation>
+      <wheelDiameter>0.3</wheelDiameter> <!-- 2 * 0.15 radius -->
+
+      <torque>1000</torque>
+
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>body_link</robotBaseFrame>
+
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
+    </plugin>
+  </gazebo>
+
+  <!-- Camera -->
+  <gazebo reference="camera_link">
+    <material>Gazebo/Green</material>
+    <sensor name="camera" type="camera">
+        <pose> 0 0 0 0 0 0 </pose>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <camera>
+            <horizontal_fov>1.089</horizontal_fov>
+            <image>
+                <format>R8G8B8</format>
+                <width>640</width>
+                <height>480</height>
+            </image>
+            <clip>
+                <near>0.05</near>
+                <far>8.0</far>
+            </clip>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <frameName>camera_link_optical</frameName>
+            <topicName>sensor/camera</topicName>
+            <cameraName>camera</cameraName>
+        </plugin>
+    </sensor>
+
+<!-- Sonar range measurement -->
+  <gazebo reference="sonar_link">
+    <sensor type="ray" name="sonar">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>50</update_rate>
+      <ray>
+         <scan>
+            <horizontal>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.01</min_angle>
+               <max_angle>0.01</max_angle>
+            </horizontal>
+            <vertical>
+               <samples>10</samples>
+               <resolution>1</resolution> 
+               <min_angle>-0.01</min_angle>
+               <max_angle>0.01</max_angle> 
+            </vertical>
+         </scan>
+         <range>
+            <min>0.01</min>
+            <max>5</max>
+            <resolution>0.02</resolution>
+         </range>
+      </ray>
+      <plugin name="gazebo_ros_range" filename="libgazebo_ros_range.so">
+        <topicName>sensor/sonar</topicName>
+        <frameName>sonar_link</frameName>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>50</updateRate>
+        <gaussianNoise>0.005</gaussianNoise>
+        <radiation>ULTRASOUND</radiation>
+        <fov>1.0</fov>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+<!-- Lidar -->
+<gazebo reference="lidar_link">
+
+</gazebo>
+  <material>Gazebo/Red</material>
+  <sensor name="lidar" type="ray">
+      <pose> 0 0 0 0 0 0 </pose>
+      <visualize>false</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+          <scan>
+              <horizontal>
+                  <samples>360</samples>
+                  <min_angle>-3.14</min_angle>
+                  <max_angle>3.14</max_angle>
+              </horizontal>
+          </scan>
+          <range>
+              <min>0.3</min>
+              <max>12</max>
+          </range>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+              <argument>~/out:=scan</argument>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frameName>laser_frame</frameName>
+          <topicName>sensor/lidar</topicName>
+      </plugin>
+  </sensor>
+  </gazebo>
+</robot>
