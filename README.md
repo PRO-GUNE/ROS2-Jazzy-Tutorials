@@ -41,4 +41,3 @@ Finally, to launch the robot in Gazebo you should create a launch file. A partia
 3. **Create a launch file**: Create a launch file that launches the robot in Gazebo with the URDF file and the control node.
 4. **Test the robot**: Test the robot in Gazebo and make sure it is working as expected.
 5. **Document the process**: Document the process of creating the URDF file, control node, and launch file. Include any challenges faced and how they were overcome.
-

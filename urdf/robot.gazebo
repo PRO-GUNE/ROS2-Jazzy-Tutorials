@@ -16,15 +16,21 @@
   </gazebo>
 
   <gazebo reference="rear_left_wheel">
-    <!-- TODO: Complete -->
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
   </gazebo>
 
   <gazebo reference="front_right_wheel">
-    <!-- TODO: Complete -->
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
   </gazebo>
 
   <gazebo reference="front_left_wheel">
-    <!-- TODO: Complete -->
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/Yellow</material>
   </gazebo>
 
   <gazebo reference="sonar_link">
@@ -38,10 +44,10 @@
       <robotNamespace></robotNamespace>
 
       <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
-      <!-- TODO: Give the correct joint values -->
-      <rightFrontJoint></rightFrontJoint>
-      <leftRearJoint></leftRearJoint>
-      <rightRearJoint></rightRearJoint>
+      <!-- Joint names for skid steer drive -->
+      <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
+      <leftRearJoint>rear_left_wheel_joint</leftRearJoint>
+      <rightRearJoint>rear_right_wheel_joint</rightRearJoint>
 
       <!-- Replace macros with numeric values if used outside xacro -->
       <wheelSeparation>0.7</wheelSeparation>
@@ -127,8 +133,6 @@
 
 <!-- Lidar -->
 <gazebo reference="lidar_link">
-
-</gazebo>
   <material>Gazebo/Red</material>
   <sensor name="lidar" type="ray">
       <pose> 0 0 0 0 0 0 </pose>
@@ -152,9 +156,9 @@
               <argument>~/out:=scan</argument>
           </ros>
           <output_type>sensor_msgs/LaserScan</output_type>
-          <frameName>laser_frame</frameName>
+          <frameName>lidar_link</frameName>
           <topicName>sensor/lidar</topicName>
       </plugin>
   </sensor>
-  </gazebo>
+</gazebo>
 </robot>

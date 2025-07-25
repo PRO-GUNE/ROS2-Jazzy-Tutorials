@@ -7,7 +7,7 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    pkg_name = FindPackageShare("pkg_name")
+    pkg_name = FindPackageShare("robot_model_pkg")  # Updated package name
 
     # Xacro command to generate URDF
     xacro_command = [
@@ -18,8 +18,16 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            # TODO: Create the control node
-            # Node
+            # Robot Control Node
+            Node(
+                package='robot_model_pkg',
+                executable='robot_control_node.py',
+                name='robot_control_node',
+                output='screen',
+                parameters=[
+                    {'use_sim_time': True}
+                ]
+            ),
             # Load Gazebo world
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
@@ -33,34 +41,53 @@ def generate_launch_description():
                         )
                     ]
                 ),
-                # TODO: Provide the correct values for the argumentsarguments
+                # Launch arguments for Gazebo
                 launch_arguments={
                     "world": PathJoinSubstitution(
                         [pkg_name, "worlds", "four_walls.world"]
                     ),
-                    "paused": "TODO: Provide the correct value",
-                    "use_sim_time": "TODO: Provide the correct value",
-                    "gui": "TODO: Provide the correct value",
-                    "headless": "TODO: Provide the correct value",
-                    "debug": "TODO: Provide the correct value",
+                    "paused": "false",
+                    "use_sim_time": "true",
+                    "gui": "true",
+                    "headless": "false",
+                    "debug": "false",
                 }.items(),
             ),
-            # Robot description parameter
-            ExecuteProcess(
-                cmd=[
-                    "ros2",
-                    "param",
-                    "set",
-                    "/robot_state_publisher",
-                    "robot_description",
-                    PathJoinSubstitution([FindExecutable(name="xacro")]),
-                    PathJoinSubstitution([pkg_name, "urdf", "robot.xacro"]),
-                ],
-                shell=True,
-            ),
-            # TODO: Create the robot state publisher node
             # Robot state publisher
-            # TODO: Spawn the robot in Gazebo
+            Node(
+                package='robot_state_publisher',
+                executable='robot_state_publisher',
+                name='robot_state_publisher',
+                output='screen',
+                parameters=[
+                    {'use_sim_time': True},
+                    {'robot_description': xacro_command}
+                ]
+            ),
+            
+            # Joint state publisher
+            Node(
+                package='joint_state_publisher',
+                executable='joint_state_publisher',
+                name='joint_state_publisher',
+                output='screen',
+                parameters=[{'use_sim_time': True}]
+            ),
+            
             # Spawn robot in Gazebo
+            Node(
+                package='gazebo_ros',
+                executable='spawn_entity.py',
+                name='spawn_robot',
+                output='screen',
+                arguments=[
+                    '-topic', 'robot_description',
+                    '-entity', 'four_wheel_robot',
+                    '-x', '0.0',
+                    '-y', '0.0',
+                    '-z', '0.5'
+                ],
+                parameters=[{'use_sim_time': True}]
+            ),
         ]
     )
