@@ -1,66 +1,61 @@
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, ExecuteProcess
+from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-from launch.substitutions import FindExecutable, PathJoinSubstitution
-from launch_ros.substitutions import FindPackageShare
-
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
+from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
-    pkg_name = FindPackageShare("pkg_name")
+    # Absolute path to package (temporary workaround)
+    pkg_path = "/home/ovs/ros2_new_ws/install/four_wheel_robot"
+    
+    # Robot description using direct path
+    robot_description_content = Command([
+        FindExecutable(name='xacro'), ' ',
+        PathJoinSubstitution([pkg_path, 'urdf', 'robot.xacro'])
+    ])
+    
+    return LaunchDescription([
+        # Launch Gazebo
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                PathJoinSubstitution([
+                    '/opt/ros/jazzy/share/ros_gz_sim',
+                    'launch',
+                    'gz_sim.launch.py'
+                ])
+            ]),
+            launch_arguments={
+                'gz_args': PathJoinSubstitution([pkg_path, 'worlds', 'four_walls.world'])
+            }.items()
+        ),
 
-    # Xacro command to generate URDF
-    xacro_command = [
-        PathJoinSubstitution([FindExecutable(name="xacro")]),
-        " ",
-        PathJoinSubstitution([pkg_name, "urdf", "robot.xacro"]),
-    ]
+        # Robot State Publisher
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            output='screen',
+            parameters=[{
+                'robot_description': ParameterValue(robot_description_content, value_type=str)
+            }]
+        ),
 
-    return LaunchDescription(
-        [
-            # TODO: Create the control node
-            # Node
-            # Load Gazebo world
-            IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    [
-                        PathJoinSubstitution(
-                            [
-                                FindPackageShare("gazebo_ros"),
-                                "launch",
-                                "gazebo.launch.py",
-                            ]
-                        )
-                    ]
-                ),
-                # TODO: Provide the correct values for the argumentsarguments
-                launch_arguments={
-                    "world": PathJoinSubstitution(
-                        [pkg_name, "worlds", "four_walls.world"]
-                    ),
-                    "paused": "TODO: Provide the correct value",
-                    "use_sim_time": "TODO: Provide the correct value",
-                    "gui": "TODO: Provide the correct value",
-                    "headless": "TODO: Provide the correct value",
-                    "debug": "TODO: Provide the correct value",
-                }.items(),
-            ),
-            # Robot description parameter
-            ExecuteProcess(
-                cmd=[
-                    "ros2",
-                    "param",
-                    "set",
-                    "/robot_state_publisher",
-                    "robot_description",
-                    PathJoinSubstitution([FindExecutable(name="xacro")]),
-                    PathJoinSubstitution([pkg_name, "urdf", "robot.xacro"]),
-                ],
-                shell=True,
-            ),
-            # TODO: Create the robot state publisher node
-            # Robot state publisher
-            # TODO: Spawn the robot in Gazebo
-            # Spawn robot in Gazebo
-        ]
-    )
+        # Spawn Robot
+        Node(
+            package='ros_gz_sim',
+            executable='create',
+            arguments=[
+                '-topic', 'robot_description',
+                '-name', 'four_wheel_robot',
+                '-x', '0.0', '-y', '0.0', '-z', '0.1'
+            ],
+            output='screen'
+        ),
+
+        # Your controller node
+        Node(
+            package='four_wheel_robot',
+            executable='controller_node',
+            output='screen'
+        )
+    ])
